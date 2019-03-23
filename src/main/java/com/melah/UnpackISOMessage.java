@@ -46,7 +46,6 @@ public class UnpackISOMessage {
             System.out.printf("MTI = %s%n", isoMsg.getMTI());
             System.out.println("127.003 : " + isoMsg.getString("127.003"));
             System.out.println("127.033 : " + isoMsg.getString("127.033"));
-            System.out.println("52 : " + isoMsg.getString("52").getBytes());
             for (int i = 1; i <= isoMsg.getMaxField(); i++) {
                 if (isoMsg.hasField(i)) {
                     System.out.printf("Field (%s) = %s%n", i, isoMsg.getString(i));
