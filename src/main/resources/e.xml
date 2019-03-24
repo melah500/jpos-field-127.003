@@ -785,8 +785,9 @@
         <isofield
                 id="33"
                 length="4"
+                pad="true"
                 name="EXT BIT"
-                class="org.jpos.iso.IFA_NUMERIC"/>
+                class="org.jpos.iso.IFB_NUMERIC"/>
     </isofieldpackager>
 
     <isofield

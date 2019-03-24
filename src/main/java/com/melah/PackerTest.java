@@ -18,7 +18,7 @@ public class PackerTest {
             logger.addListener (new SimpleLogListener());
 
             // Load package from resources directory.
-            InputStream is = com.melah.PackerTest.class.getResourceAsStream("/fields.xml");
+            InputStream is = com.melah.PackerTest.class.getResourceAsStream("/base1.xml");
             GenericPackager packager = new GenericPackager(is);
             packager.setLogger(logger, "debug");
 
@@ -52,9 +52,10 @@ public class PackerTest {
             isoMsg.set(59, "0541953424");
             isoMsg.set(102, "5000000000000000");
             isoMsg.set(123, "100000000000000");
-            isoMsg.set("127.003", "XYZ Mobile");
-            isoMsg.set("127.033", "6000");
             isoMsg.set(54, "500000000");
+            isoMsg.set("127.003", "XYZ Mobile");
+            isoMsg.set("127.33", "6487");
+
 
 
             byte[] bIsoMsg = isoMsg.pack();

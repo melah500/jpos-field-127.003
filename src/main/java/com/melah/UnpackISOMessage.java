@@ -23,10 +23,10 @@ public class UnpackISOMessage {
     private ISOMsg parseISOMessage() throws Exception {
         Logger logger = new Logger();
         logger.addListener (new SimpleLogListener());
-         String message = "0200F23E449508E0852000000000040000221658000000000000003170000000000000000115051213594972153630122119121221601202027C00000000C000000000650000000050000000011431580000000011400000XYZ Mobile Banking                      84000950000000000415100100541953424165000000000000000015100000000000000000060    ﾀ   XYZ Mobile                                      6000";
+         String message = "0200F23E449508E0852000000000040000221658000000000000003170000000000000000115051213594972153630122119121221601202027C00000000C000000000650000000050000000011431580000000011400000XYZ Mobile Banking                      84000950000000000415100100541953424165000000000000000015100000000000000000042    ﾀ   XYZ Mobile                    6487";
         System.out.printf("Message = %s%n", message);
         try {
-            InputStream is = getClass().getResourceAsStream("/fields.xml");
+            InputStream is = getClass().getResourceAsStream("/base1.xml");
             GenericPackager packager = new GenericPackager(is);
             packager.setLogger(logger, "debug");
             ISOMsg isoMsg = new ISOMsg();
@@ -45,7 +45,7 @@ public class UnpackISOMessage {
 
             System.out.printf("MTI = %s%n", isoMsg.getMTI());
             System.out.println("127.003 : " + isoMsg.getString("127.003"));
-            System.out.println("127.033 : " + isoMsg.getString("127.033"));
+            System.out.println("127.033 : " + isoMsg.getString("127.33"));
             for (int i = 1; i <= isoMsg.getMaxField(); i++) {
                 if (isoMsg.hasField(i)) {
                     System.out.printf("Field (%s) = %s%n", i, isoMsg.getString(i));
