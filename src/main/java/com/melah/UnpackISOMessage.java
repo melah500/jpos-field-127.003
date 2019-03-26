@@ -10,35 +10,26 @@ import org.jpos.util.SimpleLogListener;
 import java.io.InputStream;
 
 public class UnpackISOMessage {
-    public static void main(String[] args) {
-        UnpackISOMessage iso = new UnpackISOMessage();
-        try {
-            ISOMsg isoMsg = iso.parseISOMessage();
-            iso.printISOMessage(isoMsg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    private ISOMsg parseISOMessage() throws Exception {
+    public ISOMsg parseISOMessage(byte[] message) throws Exception {
         Logger logger = new Logger();
         logger.addListener (new SimpleLogListener());
-         String message = "0200F23E449508E0852000000000040000221658000000000000003170000000000000000115051213594972153630122119121221601202027C00000000C000000000650000000050000000011431580000000011400000XYZ Mobile Banking                      84000950000000000415100100541953424165000000000000000015100000000000000000042    ﾀ   XYZ Mobile                    6487";
-        System.out.printf("Message = %s%n", message);
+
         try {
             InputStream is = getClass().getResourceAsStream("/base1.xml");
             GenericPackager packager = new GenericPackager(is);
             packager.setLogger(logger, "debug");
             ISOMsg isoMsg = new ISOMsg();
             isoMsg.setPackager(packager);
-            isoMsg.unpack(message.getBytes());
+            isoMsg.unpack(message);
+            printISOMessage(isoMsg);
             return isoMsg;
         } catch (ISOException e) {
             throw new Exception(e);
         }
     }
 
-    private void printISOMessage(ISOMsg isoMsg) {
+    public void printISOMessage(ISOMsg isoMsg) {
         try {
             isoMsg.dump(System.out, "");
             System.out.println(ISOUtil.hexdump(isoMsg.pack()));

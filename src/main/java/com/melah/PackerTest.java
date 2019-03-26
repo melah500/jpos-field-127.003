@@ -1,19 +1,18 @@
 package com.melah;
 
 import org.jpos.iso.ISOException;
-import org.jpos.iso.ISOField;
 import org.jpos.iso.ISOMsg;
+import org.jpos.iso.ISOUtil;
 import org.jpos.iso.packager.GenericPackager;
 import org.jpos.util.Logger;
 import org.jpos.util.SimpleLogListener;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class PackerTest {
 
-        public static void main(String[] args) throws ISOException {
+        public static void main(String[] args) throws Exception {
             Logger logger = new Logger();
             logger.addListener (new SimpleLogListener());
 
@@ -60,9 +59,15 @@ public class PackerTest {
 
             byte[] bIsoMsg = isoMsg.pack();
 
+            System.out.println(ISOUtil.hexdump(bIsoMsg));
+
+            UnpackISOMessage unpackISOMessage = new UnpackISOMessage();
+            unpackISOMessage.parseISOMessage(bIsoMsg);
+
+
             String isoMessage = "";
             for (int i = 0; i < bIsoMsg.length; i++) {
-                String a = "";
+                String ab = "";
                 isoMessage += (char) bIsoMsg[i];
             }
             System.out.println(" Packed ISO8385 Message = '"+isoMessage+"'");
